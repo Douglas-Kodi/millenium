@@ -7,45 +7,20 @@ import { Head } from '@inertiajs/inertia-vue3';
     <Head title="Dashboard" />
 
     <BreezeAuthenticatedLayout>
-        <Navbar />
-        <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
-            <div class="w3-row">
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Dashboard
+            </h2>
+        </template>
 
-                <!-- Left Column --> 
-                <div class="w3-col m3">
-                    <Profile />
-                    <Accordion />
-                    <Interests />
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        You're logged in!
+                    </div>
                 </div>
-                <!-- Middle Column -->
-                <div class="w3-col m7">
-
-                </div>
-                <!-- Right Column -->
-                <div class="w3-col m2">
-                
-                </div>
-
             </div>
         </div>
-
-
     </BreezeAuthenticatedLayout>
 </template>
-
-<script>
-import Navbar from '../Components/w3css/Navbar.vue'
-import Profile from '../Components/w3css/Profile.vue'
-import Accordion from '../Components/w3css/Accordion.vue'
-import Interests from '../Components/w3css/Interests.vue'
-
-export default {
-    name:"Dashboard",
-    components:{
-        Navbar,
-        Profile,
-        Accordion,
-        Interests
-    }
-}
-</script>
