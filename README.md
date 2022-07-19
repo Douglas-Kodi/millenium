@@ -15,3 +15,14 @@ npm install
 ```sh
 git clone --repositorie-link
 ```
+
+### Starter Millenium
+
+- Open cmd
+```sh
+php artisan serve
+```
+- and
+```sh
+npm run dev
+```
