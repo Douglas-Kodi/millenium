@@ -4,10 +4,14 @@
 
 ### Install npm
 
-- npm install
+```sh
+npm install
+```
 
 ### Download the files from GitHub
 
 - Create a folder
 - Open cmd
-- git clone "link github"
+```sh
+git clone "link github"
+```
