@@ -1,3 +1,5 @@
-## Millenium social network developed in laravel and vue
+### Millenium social network developed in laravel and vue
 
-IN PROGRESS
+##Install Laravel and Vue
+
+-- npm install
