@@ -37,15 +37,15 @@ import { Head } from '@inertiajs/inertia-vue3';
 </template>
 
 <script>
-import Navbar from '../Components/w3css/Navbar.vue'
-import Profile from '../Components/w3css/Profile.vue'
-import Accordion from '../Components/w3css/Accordion.vue'
-import Interests from '../Components/w3css/Interests.vue'
-import Publication from '../Components/w3css/Publication.vue'
-import Post from '../Components/w3css/Post.vue'
-import Events from '../Components/w3css/Events.vue'
-import Solicitation from '../Components/w3css/Solicitation.vue'
-import ADS from '../Components/w3css/ADS.vue'
+import Navbar from '../Components/Generic/Navbar.vue'
+import Profile from '../Components/Feed/Profile.vue'
+import Accordion from '../Components/Feed/Accordion.vue'
+import Interests from '../Components/Feed/Interests.vue'
+import Publication from '../Components/Generic/Publication.vue'
+import Post from '../Components/Generic/Post.vue'
+import Events from '../Components/Feed/Events.vue'
+import Solicitation from '../Components/Generic/Solicitation.vue'
+import ADS from '../Components/Feed/ADS.vue'
 
 export default {
     name:"Dashboard",
