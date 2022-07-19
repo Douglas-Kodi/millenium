@@ -21,8 +21,5 @@ git clone --repositorie-link
 - Open cmd
 ```sh
 php artisan serve
-```
-and
-```sh
 npm run dev
 ```
