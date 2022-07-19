@@ -34,6 +34,31 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
+                <BreezeLabel for="lastname" value="Lastname" />
+                <BreezeInput id="lastname" type="text" class="mt-1 block w-full" v-model="form.lastname" />
+            </div>
+
+            <div class="mt-4">
+                <BreezeLabel for="username" value="Username" />
+                <BreezeInput id="username" type="text" class="mt-1 block w-full" v-model="form.username" />
+            </div>
+
+            <div class="mt-4">
+                <BreezeLabel for="profession" value="Profession" />
+                <BreezeInput id="profession" type="text" class="mt-1 block w-full" v-model="form.profession" />
+            </div>
+
+            <div class="mt-4">
+                <BreezeLabel for="address" value="Address" />
+                <BreezeInput id="address" type="text" class="mt-1 block w-full" v-model="form.address" />
+            </div>
+            
+            <div class="mt-4">
+                <BreezeLabel for="birthdate" value="Birthdate" />
+                <BreezeInput id="birthdate" type="date" class="mt-1 block w-full" v-model="form.birthdate" />
+            </div>
+
+            <div class="mt-4">
                 <BreezeLabel for="email" value="Email" />
                 <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autocomplete="username" />
             </div>
