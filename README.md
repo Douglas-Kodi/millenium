@@ -16,6 +16,17 @@ npm install
 git clone --repositorie-link
 ```
 
+### Starter BD
+
+- Open file ".env" 
+```sh
+DB_DATABASE=millenium
+```
+- Open cmd
+```sh
+php artisan migrate
+```
+
 ### Starter Millenium
 
 - Open cmd
