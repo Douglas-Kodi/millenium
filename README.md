@@ -13,5 +13,5 @@ npm install
 - Create a folder
 - Open cmd
 ```sh
-git clone --project-link
+git clone --repositorie-link
 ```
