@@ -2,7 +2,7 @@
 
 ## How to use
 
-### Install Laravel and Vue
+### Install npm
 
 - npm install
 
