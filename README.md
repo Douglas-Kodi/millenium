@@ -22,7 +22,7 @@ git clone --repositorie-link
 ```sh
 php artisan serve
 ```
-- and
+and
 ```sh
 npm run dev
 ```
