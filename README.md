@@ -3,3 +3,5 @@
 ### Install Laravel and Vue
 
 - npm install
+
+### Download the files
