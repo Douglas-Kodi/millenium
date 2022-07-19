@@ -6,4 +6,4 @@
 
 - npm install
 
-### Download the files
+### Download the files from GitHub
