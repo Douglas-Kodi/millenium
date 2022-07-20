@@ -16,9 +16,9 @@ npm install
 git clone https://github.com/Douglas-Kodi/millenium.git
 ```
 
-### How to start DataBase
+### How to start DataBase(BD)
 
-- Start a database of your choice
+- Start a BD of your choice
 - Create BD name "millenium" and collation "utf8mb4_unicode_ci"
 - Open cmd
 ```sh
