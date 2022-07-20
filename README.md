@@ -16,7 +16,7 @@ npm install
 git clone --repositorie-link
 ```
 
-### Starter BD
+### How to start BD
 
 - Create BD name "millenium" and collation "utf8mb4_unicode_ci"
 - Open cmd
