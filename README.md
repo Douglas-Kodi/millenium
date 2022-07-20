@@ -23,6 +23,7 @@ git clone --repositorie-link
 ```sh
 php artisan migrate
 ```
+- Start BD
 
 ### Starter Millenium
 
