@@ -18,10 +18,7 @@ git clone --repositorie-link
 
 ### Starter BD
 
-- Open file ".env" 
-```sh
-DB_DATABASE=millenium
-```
+- Create BD name "millenium" and collation "utf8mb4_unicode_ci"
 - Open cmd
 ```sh
 php artisan migrate
