@@ -13,7 +13,7 @@ npm install
 - Create a folder
 - Open cmd
 ```sh
-git clone --repositorie-link
+git clone https://github.com/Douglas-Kodi/millenium.git
 ```
 
 ### How to start BD
