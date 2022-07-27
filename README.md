@@ -22,6 +22,7 @@ git clone https://github.com/Douglas-Kodi/millenium.git
 - Create BD name "millenium" and collation "utf8mb4_unicode_ci"
 - Open cmd in the folder where your repository is
 ```sh
+composer install
 php artisan migrate
 ```
 
