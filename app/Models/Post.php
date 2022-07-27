@@ -14,19 +14,16 @@ class Post extends Model
         'deleted_at'
     ];
     
-    public function User(){
+    public function user() {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
-    public function Photos()
-    {
+    public function photos() {
         return $this->hasMany('App\Models\Photo', 'post_id');
     }
-    public function Likes()
-    {
+    public function likes() {
         return $this->hasMany('App\Models\Like', 'like_id');
     }
-    public function Comments()
-    {
+    public function comments() {
         return $this->hasMany('App\Models\Comment', 'comment_id');
     }
 }
