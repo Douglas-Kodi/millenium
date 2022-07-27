@@ -19,6 +19,8 @@ composer install
 
 ### How to start DataBase(BD)
 
+- Copy the contents of the file ".env.example" 
+- Create a file named like ".env" and paste
 - Start a BD of your choice
 - Create BD name "millenium" and collation "utf8mb4_unicode_ci"
 - Open cmd in the folder where your repository is
