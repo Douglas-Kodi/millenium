@@ -48,16 +48,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Posts()
-    {
+    public function posts() {
         return $this->hasMany('App\Models\Post', 'post_id');
     }
-    public function Likes()
-    {
+    public function likes() {
         return $this->hasMany('App\Models\Like', 'like_id');
     }
-    public function Comments()
-    {
+    public function comments() {
         return $this->hasMany('App\Models\Comment', 'comment_id');
     }
 }
+
