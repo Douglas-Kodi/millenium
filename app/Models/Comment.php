@@ -15,11 +15,11 @@ class Comment extends Model
         'deleted_at'
     ];
     
-    public function User(){
+    public function user() {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
-    public function Post()
-    {
+    public function post() {
         return $this->hasOne('App\Models\Post', 'id', 'post_id');
     }
 }
+
