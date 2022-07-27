@@ -14,8 +14,8 @@ class Photo extends Model
         'deleted_at'
     ];
     
-    public function Post()
-    {
+    public function post() {
         return $this->hasOne('App\Models\Post', 'id', 'post_id');
     }
 }
+
