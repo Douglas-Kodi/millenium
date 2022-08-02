@@ -14,6 +14,8 @@ git clone https://github.com/Douglas-Kodi/millenium.git
 
 ```sh
 npm install
+```
+```sh
 composer install
 ```
 
@@ -33,5 +35,7 @@ php artisan migrate
 - Open cmd in the folder where your repository is
 ```sh
 php artisan serve
+```
+```sh
 npm run dev
 ```
