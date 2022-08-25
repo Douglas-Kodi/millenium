@@ -1,5 +1,5 @@
 <template>
-    <div class="w3-card w3-round w3-white">
+    <div class="w3-card w3-round w3-white" id="Profile">
         <div class="w3-container">
             <h4 class="w3-center">My Profile</h4>
             <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+
 export default {
     name:"Profile"
 }
