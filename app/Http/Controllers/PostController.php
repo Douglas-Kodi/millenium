@@ -7,16 +7,18 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function index(){
-        return Post::orderBy('created_at', 'DESC')->get();
+    public function index()
+    {
+        return Post::orderBy('created_at', 'DESC')->where('deleted_at', '=', null)->get();
     }
-    public function create(){
+    public function create()
+    {
 
     }
     public function store(Request $request)
     {
         $newPost = new Post;
-        $newPost->user_id = "1";
+        $newPost->user_id = $request->post["user_id"];
         $newPost->legend = $request->post["legend"];
         $newPost->save();
 
@@ -36,7 +38,8 @@ class PostController extends Controller
         $existingPost = Post::find($id);
 
         if($existingPost){
-            $existingPost->delete();
+            $existingPost->deleted_at = date("Y-m-d\TH:i:s");
+            $existingPost->save();
             return "Post successfully deleted.";
         }
         return "Post not found.";

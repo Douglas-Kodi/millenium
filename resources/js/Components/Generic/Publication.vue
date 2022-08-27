@@ -4,7 +4,7 @@
             <div class="w3-card w3-round w3-white">
                 <div class="w3-container w3-padding">
                 <h6 class="w3-opacity">Social Media template by w3.css</h6>
-                <input type="text" v-model="post.legend" />
+                <textarea v-model="post.legend" />
                 <button type="button" class="w3-button w3-theme" @click="addPost()" :class="[post.legend ? 'active' : 'inactive', 'plus']"><i class="fa fa-pencil"></i> &nbsp;Post</button> 
                 </div>
             </div>
@@ -18,6 +18,7 @@ export default {
     data: function (){
         return {
             post: {
+                user_id: this.$page.props.auth.user.id,
                 legend: ""
             }
         }
@@ -54,5 +55,15 @@ export default {
 }
 .inactive{
     color:red;
+}
+textarea {
+  width: 100%;
+  height: 125px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
 }
 </style>
