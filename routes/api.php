@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,5 @@ Route::prefix('/post')->group(function(){
     Route::put('/{id}', [PostController::class, 'update']);
     Route::delete('/{id}', [PostController::class, 'destroy']);
 });
+Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/photo/{id}', [PhotoController::class, 'show']);

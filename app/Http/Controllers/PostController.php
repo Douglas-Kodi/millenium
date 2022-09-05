@@ -56,6 +56,5 @@ class PostController extends Controller
             return "Post successfully deleted.";
         }
         return "Post not found.";
-    }
-    
+    }   
 }
