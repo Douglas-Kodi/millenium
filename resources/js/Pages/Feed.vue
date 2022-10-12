@@ -4,10 +4,10 @@ import { Head } from '@inertiajs/inertia-vue3';
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Home" />
 
     <BreezeAuthenticatedLayout>
-        <Navbar />
+        <!-- <Navbar /> -->
         <div class="w3-container w3-content" style="max-width:1400px;margin-top:40px">    
             <div class="w3-row">
 
@@ -19,8 +19,13 @@ import { Head } from '@inertiajs/inertia-vue3';
                 </div>
                 <!-- Middle Column -->
                 <div class="w3-col m7">
-                    <Publication />
-                    <Post />
+                    <Publication 
+                        v-on:reloadPost="getPost()"
+                    />
+                    <Post 
+                        :posts="posts"
+                        v-on:reloadPost="getPost()"
+                    />
                 </div>
                 <!-- Right Column -->
                 <div class="w3-col m2">
@@ -48,7 +53,7 @@ import Solicitation from '../Components/Generic/Solicitation.vue'
 import ADS from '../Components/Feed/ADS.vue'
 
 export default {
-    name:"Dashboard",
+    name:"Feed",
     components:{
         Navbar,
         Profile,
@@ -59,6 +64,25 @@ export default {
         Events,
         Solicitation,
         ADS
+    },
+    data: function () {
+        return {
+            posts: []
+        }
+    },
+    methods: {
+        getPost(){
+            axios.get('api/posts')
+            .then(response => {
+                this.posts = response.data
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
+    },
+    created(){
+        this.getPost();
     }
 }
 </script>

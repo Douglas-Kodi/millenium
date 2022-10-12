@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
             $table->string('legend')->nullable();
             $table->timestamps();
-            $table->date('deleted_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
