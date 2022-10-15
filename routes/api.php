@@ -27,5 +27,5 @@ Route::prefix('/post')->group(function(){
     Route::put('/{id}', [PostController::class, 'update']);
     Route::delete('/{id}', [PostController::class, 'destroy']);
 });
-Route::get('/user/{id}', [UserController::class, 'show']);
-Route::get('/photo/{id}', [PhotoController::class, 'show']);
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/photos', [PhotoController::class, 'index']);

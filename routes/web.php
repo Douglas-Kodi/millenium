@@ -14,3 +14,9 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/Feed', function () {
+    return Inertia::render('Feed');
+})->middleware(['auth', 'verified'])->name('home');
+
+//Route::resource('markets', 'App\Http\Controllers\MarketController');

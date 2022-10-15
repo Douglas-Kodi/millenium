@@ -42,6 +42,7 @@ class PostController extends Controller
         $existingPost = Post::find($id);
 
         if($existingPost){
+            $existingPost->legend = $request->legend;
             $existingPost->save();
             return $existingPost;
         }
