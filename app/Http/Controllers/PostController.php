@@ -18,21 +18,23 @@ class PostController extends Controller
     }
     public function store(Request $request)
     {
+        if(($request->legend)or($request->hasFile('image'))){
         $newPost = new Post;
         $newPost->user_id = $request->user_id;
         $newPost->legend = $request->legend;
         $newPost->save();
 
-        if($request->hasFile('image')){
-            $destination_path = 'public/img/post/';
-            $image = $request->file('image');
-            $image_name = $image->GetClientOriginalName();
-            $path = $request->file('image')->storeAs($destination_path,$image_name);
+            if($request->hasFile('image')){
+                $destination_path = 'public/img/post/';
+                $image = $request->file('image');
+                $image_name = $image->GetClientOriginalName();
+                $path = $request->file('image')->storeAs($destination_path,$image_name);
 
-            $newPhoto = new Photo;
-            $newPhoto->post_id = $newPost->id;
-            $newPhoto->src = $image_name;
-            $newPhoto->save();
+                $newPhoto = new Photo;
+                $newPhoto->post_id = $newPost->id;
+                $newPhoto->src = $image_name;
+                $newPhoto->save();
+            }
         }
 
         return $newPost;
