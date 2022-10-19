@@ -39,3 +39,8 @@ php artisan serve
 ```sh
 npm run dev
 ```
+# Note:
+if the file system is not showing, use the command:
+```sh
+php artisan storage:link
+```
