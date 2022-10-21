@@ -44,9 +44,30 @@ class PostController extends Controller
         $existingPost = Post::find($id);
 
         if($existingPost){
-            $existingPost->legend = $request->legend;
-            $existingPost->save();
-            return $existingPost;
+
+            if(($request->legend)or($request->hasFile('imageUp'))){
+                $existingPost->legend = $request->legend;
+                $existingPost->save();
+                
+                if($request->hasFile('imageUp')){
+                    $destination_path = 'public/img/post/';
+                    $image = $request->file('imageUp');
+                    $image_name = $image->GetClientOriginalName();
+                    $path = $request->file('imageUp')->storeAs($destination_path,$image_name);
+
+                    $existingPhoto = Photo::where('post_id', $id);
+                    if($existingPhoto){
+                        $existingPhoto->src = $image_name;
+                        $existingPhoto->save();
+                    }else{
+                        $newPhoto = new Photo;
+                        $newPhoto->post_id = $id;
+                        $newPhoto->src = $image_name;
+                        $newPhoto->save();
+                    }
+                }
+                return $existingPost;
+            }
         }
     }
     public function destroy($id)
