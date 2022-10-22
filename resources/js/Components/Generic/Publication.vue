@@ -59,7 +59,6 @@ export default {
             .then(response=>{
                 if(response.status == 201){
                     this.post.legend = "";
-                    this.image = "";
                     this.avatar = null;
                     this.$emit('reloadPost');
                 }

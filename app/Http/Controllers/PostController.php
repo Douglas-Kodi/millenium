@@ -36,39 +36,36 @@ class PostController extends Controller
                 $newPhoto->save();
             }
         }
-
         return $newPost;
     }
     public function update(Request $request, $id)
     {
         $existingPost = Post::find($id);
-
+        
         if($existingPost){
-
-            if(($request->legend)or($request->hasFile('imageUp'))){
+            if($request->legend){
                 $existingPost->legend = $request->legend;
                 $existingPost->save();
+            }
+            if($request->hasFile('imageUp')){
+                $destination_path = 'public/img/post/';
+                $image = $request->file('imageUp');
+                $image_name = $image->GetClientOriginalName();
+                $path = $request->file('imageUp')->storeAs($destination_path,$image_name);
                 
-                if($request->hasFile('imageUp')){
-                    $destination_path = 'public/img/post/';
-                    $image = $request->file('imageUp');
-                    $image_name = $image->GetClientOriginalName();
-                    $path = $request->file('imageUp')->storeAs($destination_path,$image_name);
-
-                    $existingPhoto = Photo::where('post_id', $id);
-                    if($existingPhoto){
-                        $existingPhoto->src = $image_name;
-                        $existingPhoto->save();
-                    }else{
-                        $newPhoto = new Photo;
-                        $newPhoto->post_id = $id;
-                        $newPhoto->src = $image_name;
-                        $newPhoto->save();
-                    }
+                $existingPhoto = Photo::where('post_id', $id);
+                if($existingPhoto){
+                    $existingPhoto->src = $image_name;
+                    $existingPhoto->save();
+                }else{
+                    $newPhoto = new Photo;
+                    $newPhoto->post_id = $id;
+                    $newPhoto->src = $image_name;
+                    $newPhoto->save();
                 }
-                return $existingPost;
             }
         }
+        return $existingPost;
     }
     public function destroy($id)
     {

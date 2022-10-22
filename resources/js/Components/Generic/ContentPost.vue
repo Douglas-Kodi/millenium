@@ -82,10 +82,6 @@ export default {
     props:['post', 'users', 'photos'],
     data: function (){
         return {
-            post: {
-                legend:this.post.legend,
-                imageUp:this.imageUp,
-            },
             avatarUp:null,
         };
     },
@@ -124,16 +120,18 @@ export default {
                 },
             };
             var formData = new FormData();
+            formData.append('_method', 'PUT');
             formData.append('legend', this.post.legend);
             formData.append('imageUp', this.imageUp);
             for (var value of formData.values()) {
                 console.log(value);
             }
-            axios.put('api/post/' + event, formData, config)
+            axios.post('api/post/'+ event, formData, config)
             .then(response=>{
-                this.imageUp = "";
-                this.avatarUp = null;
-                this.$emit('reloadPost');
+                if(response.status == 200){
+                    this.avatarUp = null;
+                    this.$emit('postchanged');
+                }
             })
             .catch(error =>{
                 console.log(error);
