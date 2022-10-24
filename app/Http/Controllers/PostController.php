@@ -53,15 +53,15 @@ class PostController extends Controller
                 $image_name = $image->GetClientOriginalName();
                 $path = $request->file('imageUp')->storeAs($destination_path,$image_name);
                 
-                $existingPhoto = Photo::where('post_id', $id);
-                if($existingPhoto){
-                    $existingPhoto->src = $image_name;
-                    $existingPhoto->save();
-                }else{
+                $existingPhoto = Photo::where('post_id', '=', $id)->first();
+                if($existingPhoto->post_id==null){
                     $newPhoto = new Photo;
                     $newPhoto->post_id = $id;
                     $newPhoto->src = $image_name;
                     $newPhoto->save();
+                }else{
+                    $existingPhoto->src = $image_name;
+                    $existingPhoto->save();
                 }
             }
         }
