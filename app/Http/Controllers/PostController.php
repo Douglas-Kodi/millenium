@@ -54,14 +54,20 @@ class PostController extends Controller
                 $path = $request->file('imageUp')->storeAs($destination_path,$image_name);
                 
                 $existingPhoto = Photo::where('post_id', '=', $id)->first();
-                if($existingPhoto->post_id==null){
+                if($existingPhoto == false){
                     $newPhoto = new Photo;
                     $newPhoto->post_id = $id;
                     $newPhoto->src = $image_name;
                     $newPhoto->save();
+
+                    $existingPost->updated_at = date("Y-m-d\TH:i:s");
+                    $existingPost->save();
                 }else{
                     $existingPhoto->src = $image_name;
                     $existingPhoto->save();
+                    
+                    $existingPost->updated_at = date("Y-m-d\TH:i:s");
+                    $existingPost->save();
                 }
             }
         }

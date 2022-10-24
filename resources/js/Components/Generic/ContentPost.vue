@@ -37,11 +37,11 @@
                         </div>
                     </div>
                     <center>
-                        <label for="imagesArrayUp" class="w3-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M2.25 4a.25.25 0 00-.25.25v15.5c0 .138.112.25.25.25h3.178L14 10.977a1.75 1.75 0 012.506-.032L22 16.44V4.25a.25.25 0 00-.25-.25H2.25zm3.496 17.5H21.75a1.75 1.75 0 001.75-1.75V4.25a1.75 1.75 0 00-1.75-1.75H2.25A1.75 1.75 0 00.5 4.25v15.5c0 .966.784 1.75 1.75 1.75h3.496zM22 19.75v-1.19l-6.555-6.554a.25.25 0 00-.358.004L7.497 20H21.75a.25.25 0 00.25-.25zM9 9.25a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0zm1.5 0a3.25 3.25 0 11-6.5 0 3.25 3.25 0 016.5 0z"></path></svg></label>
-                        <input id="imagesArrayUp" type="file" name="imageUp" @change="getFileUp" />
+                        <label :for="'imagesArrayUp'+post.id" class="w3-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M2.25 4a.25.25 0 00-.25.25v15.5c0 .138.112.25.25.25h3.178L14 10.977a1.75 1.75 0 012.506-.032L22 16.44V4.25a.25.25 0 00-.25-.25H2.25zm3.496 17.5H21.75a1.75 1.75 0 001.75-1.75V4.25a1.75 1.75 0 00-1.75-1.75H2.25A1.75 1.75 0 00.5 4.25v15.5c0 .966.784 1.75 1.75 1.75h3.496zM22 19.75v-1.19l-6.555-6.554a.25.25 0 00-.358.004L7.497 20H21.75a.25.25 0 00.25-.25zM9 9.25a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0zm1.5 0a3.25 3.25 0 11-6.5 0 3.25 3.25 0 016.5 0z"></path></svg></label>
+                        <input :id="'imagesArrayUp'+post.id" type="file" name="imageUp" @change="getFileUp" />
                     </center>
                     <footer class="w3-container w3-teal w3-padding-16">
-                        <button type="button" class="w3-button w3-right w3-theme" @click="updatePost(post.id)" v-on:click="updateModalClose(post.id)"><i class="fa fa-pencil"></i> &nbsp;Edit</button> 
+                        <button type="button" class="w3-button w3-right w3-theme" @click="updatePost(post.id); clearUpdate()" v-on:click="updateModalClose(post.id)"><i class="fa fa-pencil"></i> &nbsp;Edit</button> 
                     </footer>
                 </form>
             </div>
@@ -50,14 +50,14 @@
         <div :id="'removeModal'+post.id" class="w3-modal">
             <div class="w3-modal-content w3-card-4 w3-animate-top">
                 <header class="w3-container w3-teal w3-display-container w3-padding-16 w3-large"> 
-                    <span v-on:click="removeModalClose(post.id)" class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+                    <span v-on:click="removeModalClose(post.id)" @click="clearUpdate" class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
                     <h5>Atenção!!!</h5>
                 </header>
                 <div class="w3-container w3-padding-24 w3-center">
                     <p>Deseja mesmo excluir essa publicação? {{ post.id }}</p>
                 </div>
                 <footer class="w3-container w3-teal w3-padding-16">
-                    <button type="button" class="w3-button w3-theme-d1 w3-right" @click="removePost(post.id)" v-on:click="removeModalClose(post.id)"><i class="fa fa-trash"></i> &nbsp;Excluir</button>
+                    <button type="button" class="w3-button w3-theme-d1 w3-right" @click="removePost(post.id); clearUpdate()" v-on:click="removeModalClose(post.id)"><i class="fa fa-trash"></i> &nbsp;Excluir</button>
                 </footer>
             </div>
         </div>
@@ -82,7 +82,7 @@ export default {
     props:['post', 'users', 'photos'],
     data: function (){
         return {
-            avatarUp:null,
+            avatarUp: null,
         };
     },
     methods:{
@@ -99,6 +99,7 @@ export default {
             return document.getElementById('removeModal'+event).style.display='none';
         },
         getFileUp(e){
+            console.log(e)
             console.log(e.target.files[0])
             this.imageUp = e.target.files[0]
             
@@ -110,7 +111,9 @@ export default {
             }
         },
         clearUpdate(){
-            this.imageUp = "";
+            this.imageUp = null;
+            this.loadImageUp = null;
+            this.loadReaderUp = null;
             this.avatarUp = null;
         },
         updatePost(event){
@@ -129,7 +132,6 @@ export default {
             axios.post('api/post/'+ event, formData, config)
             .then(response=>{
                 if(response.status == 200){
-                    this.avatarUp = null;
                     this.$emit('postchanged');
                 }
             })
