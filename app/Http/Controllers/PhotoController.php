@@ -9,11 +9,11 @@ class PhotoController extends Controller
 {
     public function index()
     {
-
+        return Photo::where('deleted_at', '=', null)->get();
     }
-    public function show($id)
+    public function show()
     {
-        return Photo::where('post_id', '=', $id)->get();
+
     }
     public function create()
     {

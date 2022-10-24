@@ -9,12 +9,12 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function index()
-    {   
-
-    }
-    public function show($id)
     {
-        return User::where('id', '=', $id)->get();
+        return User::where('deleted_at', '=', null)->get();
+    }
+    public function show()
+    {
+
     }
     public function create()
     {

@@ -20,11 +20,13 @@ import { Head } from '@inertiajs/inertia-vue3';
                 <!-- Middle Column -->
                 <div class="w3-col m7">
                     <Publication 
-                        v-on:reloadPost="getPost()"
+                        v-on:reloadPost="reload()"
                     />
                     <Post 
                         :posts="posts"
-                        v-on:reloadPost="getPost()"
+                        :users="users"
+                        :photos="photos"
+                        v-on:reloadPost="reload()"
                     />
                 </div>
                 <!-- Right Column -->
@@ -67,22 +69,50 @@ export default {
     },
     data: function () {
         return {
-            posts: []
+            posts: [],
+            users:[],
+            photos:[],
         }
     },
     methods: {
         getPost(){
             axios.get('api/posts')
             .then(response => {
-                this.posts = response.data
+                this.posts = response.data;
             })
             .catch(error => {
                 console.log(error);
             })
+        },
+        getUser(){
+
+            axios.get('api/users')
+            .then(response => {
+                this.users = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+        getPhoto(){
+            axios.get('api/photos')
+            .then(response => {
+                this.photos = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+        reload(){
+            this.getPost();
+            this.getUser();
+            this.getPhoto();
         }
     },
     created(){
         this.getPost();
+        this.getUser();
+        this.getPhoto();
     }
 }
 </script>

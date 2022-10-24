@@ -18,33 +18,60 @@ class PostController extends Controller
     }
     public function store(Request $request)
     {
+        if(($request->legend)or($request->hasFile('image'))){
         $newPost = new Post;
         $newPost->user_id = $request->user_id;
         $newPost->legend = $request->legend;
         $newPost->save();
 
-        if($request->hasFile('image')){
-            $destination_path = 'public/img/post/';
-            $image = $request->file('image');
-            $image_name = $image->GetClientOriginalName();
-            $path = $request->file('image')->storeAs($destination_path,$image_name);
+            if($request->hasFile('image')){
+                $destination_path = 'public/img/post/';
+                $image = $request->file('image');
+                $image_name = $image->GetClientOriginalName();
+                $path = $request->file('image')->storeAs($destination_path,$image_name);
 
-            $newPhoto = new Photo;
-            $newPhoto->post_id = $newPost->id;
-            $newPhoto->src = $image_name;
-            $newPhoto->save();
+                $newPhoto = new Photo;
+                $newPhoto->post_id = $newPost->id;
+                $newPhoto->src = $image_name;
+                $newPhoto->save();
+            }
         }
-
         return $newPost;
     }
     public function update(Request $request, $id)
     {
         $existingPost = Post::find($id);
-
+        
         if($existingPost){
-            $existingPost->save();
-            return $existingPost;
+            if($request->legend){
+                $existingPost->legend = $request->legend;
+                $existingPost->save();
+            }
+            if($request->hasFile('imageUp')){
+                $destination_path = 'public/img/post/';
+                $image = $request->file('imageUp');
+                $image_name = $image->GetClientOriginalName();
+                $path = $request->file('imageUp')->storeAs($destination_path,$image_name);
+                
+                $existingPhoto = Photo::where('post_id', '=', $id)->first();
+                if($existingPhoto == false){
+                    $newPhoto = new Photo;
+                    $newPhoto->post_id = $id;
+                    $newPhoto->src = $image_name;
+                    $newPhoto->save();
+
+                    $existingPost->updated_at = date("Y-m-d\TH:i:s");
+                    $existingPost->save();
+                }else{
+                    $existingPhoto->src = $image_name;
+                    $existingPhoto->save();
+                    
+                    $existingPost->updated_at = date("Y-m-d\TH:i:s");
+                    $existingPost->save();
+                }
+            }
         }
+        return $existingPost;
     }
     public function destroy($id)
     {
