@@ -69,6 +69,15 @@ class PostController extends Controller
                     $existingPost->updated_at = date("Y-m-d\TH:i:s");
                     $existingPost->save();
                 }
+            }else{
+                $existingPhoto = Photo::where('post_id', '=', $id)->first();
+                if($existingPhoto == true){
+                    $existingPhoto->src = null;
+                    $existingPhoto->save();
+                    
+                    $existingPost->updated_at = date("Y-m-d\TH:i:s");
+                    $existingPost->save();
+                }
             }
         }
         return $existingPost;
