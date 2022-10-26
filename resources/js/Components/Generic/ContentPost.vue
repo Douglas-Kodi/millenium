@@ -14,7 +14,7 @@
         <!----------------------------------------- UPDATE ----------------------------------------->
         <div :id="'updateModal'+post.id" class="w3-modal">
             <div class="w3-modal-content w3-card-4 w3-animate-top">
-                <header class="w3-container w3-teal w3-display-container w3-padding-16 w3-large"> 
+                <header class="w3-container w3-teal w3-display-container w3-padding-16 w3-medium"> 
                     <span v-on:click="updateModalClose(post.id)" @click="clearUpdate" class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
                     <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
                     <div v-for="(user, index) in users" :key="index">
@@ -26,22 +26,26 @@
                     <div class="w3-container w3-padding-16 w3-center" style="width:100%;">
                         <textarea v-model="post.legend" />
                     </div>
-                    <div v-if="avatarUp == null">
-                        <div class="w3-auto" v-for="(photo, index) in photos" :key="index">
-                            <img v-if="post.id == photo.post_id" v-bind:src="'/storage/img/post/'+photo.src" style="max-width:100%;max-height:120px;" class="w3-margin-bottom w3-auto" v-bind:alt="photo.src">
-                        </div>
-                    </div>
-                    <div v-else>
-                        <div class="w3-auto">
-                            <img :src="avatarUp" class="w3-margin-bottom w3-auto" style="max-width:100%;max-height:120px;">
-                        </div>
-                    </div>
                     <center>
+                        <div :id="'updateImg'+post.id" class="w3-image w3-mobile" style="width:35%">
+                            <div class="w3-display-container">
+                                <div v-if="avatarUp == null">
+                                    <div v-for="(photo, index) in photos" :key="index">
+                                        <img v-if="((post.id == photo.post_id)&&(photo.src!=null))" v-bind:src="'/storage/img/post/'+photo.src" v-bind:alt="photo.src">
+                                        <span v-if="((post.id == photo.post_id)&&(photo.src!=null))" class="w3-button w3-display-topright" @click="clearImg(post.id)"><i class="fa fa-remove"></i></span>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <img :src="avatarUp">
+                                    <span class="w3-button w3-display-topright" @click="clearImg(post.id)"><i class="fa fa-remove"></i></span>
+                                </div>
+                            </div>
+                        </div>
                         <label :for="'imagesArrayUp'+post.id" class="w3-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M2.25 4a.25.25 0 00-.25.25v15.5c0 .138.112.25.25.25h3.178L14 10.977a1.75 1.75 0 012.506-.032L22 16.44V4.25a.25.25 0 00-.25-.25H2.25zm3.496 17.5H21.75a1.75 1.75 0 001.75-1.75V4.25a1.75 1.75 0 00-1.75-1.75H2.25A1.75 1.75 0 00.5 4.25v15.5c0 .966.784 1.75 1.75 1.75h3.496zM22 19.75v-1.19l-6.555-6.554a.25.25 0 00-.358.004L7.497 20H21.75a.25.25 0 00.25-.25zM9 9.25a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0zm1.5 0a3.25 3.25 0 11-6.5 0 3.25 3.25 0 016.5 0z"></path></svg></label>
-                        <input :id="'imagesArrayUp'+post.id" type="file" name="imageUp" @change="getFileUp" />
+                        <input :id="'imagesArrayUp'+post.id" type="file" name="imageUp" @change="getFileUp" @click="showImg(post.id)" />
                     </center>
                     <footer class="w3-container w3-teal w3-padding-16">
-                        <button type="button" class="w3-button w3-right w3-theme" @click="updatePost(post.id); clearUpdate()" v-on:click="updateModalClose(post.id)"><i class="fa fa-pencil"></i> &nbsp;Edit</button> 
+                        <button type="button" class="w3-button w3-right w3-theme" @click="updatePost(post.id); clearUpdate();" v-on:click="updateModalClose(post.id)"><i class="fa fa-pencil"></i> &nbsp;Edit</button> 
                     </footer>
                 </form>
             </div>
@@ -70,7 +74,7 @@
         <p class="w3-margin-bottom">{{ post.legend }}</p>
         <div class="w3-row-padding" style="margin:0 -16px">
             <div class="w3-auto" v-for="(photo, index) in photos" :key="index">
-                <img v-if="post.id == photo.post_id" v-bind:src="'/storage/img/post/'+photo.src" style="max-width:100%;max-height:400px;" class="w3-margin-bottom w3-auto" v-bind:alt="photo.src">
+                <img v-if="((post.id == photo.post_id)&&(photo.src!=null))" v-bind:src="'/storage/img/post/'+photo.src" style="max-width:100%;max-height:400px;" class="w3-margin-bottom w3-auto" v-bind:alt="photo.src">
             </div>
         </div><br>
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button> 
@@ -115,6 +119,17 @@ export default {
             this.loadImageUp = null;
             this.loadReaderUp = null;
             this.avatarUp = null;
+        },
+        clearImg(e){
+            this.imageUp = null;
+            this.loadImageUp = null;
+            this.loadReaderUp = null;
+            this.avatarUp = null;
+            this.avatar = null;
+            return document.getElementById('updateImg'+e).style.display='none';
+        },
+        showImg(e){
+            document.getElementById('updateImg'+e).style.display='block';
         },
         updatePost(event){
             let config = {
