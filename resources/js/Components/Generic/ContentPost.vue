@@ -31,8 +31,10 @@
                             <div class="w3-display-container">
                                 <div v-if="avatarUp == null">
                                     <div v-for="(photo, index) in photos" :key="index">
-                                        <img v-if="((post.id == photo.post_id)&&(photo.src!=null))" v-bind:src="'/storage/img/post/'+photo.src" v-bind:alt="photo.src">
-                                        <span v-if="((post.id == photo.post_id)&&(photo.src!=null))" class="w3-button w3-display-topright" @click="clearImg(post.id)"><i class="fa fa-remove"></i></span>
+                                        <div v-if="((post.id == photo.post_id)&&(photo.src!=null))">
+                                            <img v-bind:src="'/storage/img/post/'+photo.src" v-bind:alt="photo.src">
+                                            <span class="w3-button w3-display-topright" @click="clearImg(post.id)"><i class="fa fa-remove"></i></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div v-else>
@@ -54,14 +56,14 @@
         <div :id="'removeModal'+post.id" class="w3-modal">
             <div class="w3-modal-content w3-card-4 w3-animate-top">
                 <header class="w3-container w3-teal w3-display-container w3-padding-16 w3-large"> 
-                    <span v-on:click="removeModalClose(post.id)" @click="clearUpdate" class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+                    <span v-on:click="removeModalClose(post.id)" class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
                     <h5>Atenção!!!</h5>
                 </header>
                 <div class="w3-container w3-padding-24 w3-center">
                     <p>Deseja mesmo excluir essa publicação? {{ post.id }}</p>
                 </div>
                 <footer class="w3-container w3-teal w3-padding-16">
-                    <button type="button" class="w3-button w3-theme-d1 w3-right" @click="removePost(post.id); clearUpdate()" v-on:click="removeModalClose(post.id)"><i class="fa fa-trash"></i> &nbsp;Excluir</button>
+                    <button type="button" class="w3-button w3-theme-d1 w3-right" @click="removePost(post.id);" v-on:click="removeModalClose(post.id)"><i class="fa fa-trash"></i> &nbsp;Excluir</button>
                 </footer>
             </div>
         </div>
@@ -103,7 +105,6 @@ export default {
             return document.getElementById('removeModal'+event).style.display='none';
         },
         getFileUp(e){
-            console.log(e)
             console.log(e.target.files[0])
             this.imageUp = e.target.files[0]
             
